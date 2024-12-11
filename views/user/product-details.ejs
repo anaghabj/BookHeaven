@@ -1,0 +1,634 @@
+<%- include("../../views/partials/user/header") %>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    /* General Reset and Styling */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Main Page Styles */
+    .main {
+        padding: 20px 0;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    /* Product Detail Section */
+    .product-detail img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Slider Section */
+    .product-image-slider {
+        display: flex;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-image-slider img {
+        transition: transform 0.3s ease;
+    }
+
+    .product-image-slider .border-radius-10 {
+        width: 100%;
+        height: 400px;
+    }
+
+    /* Thumbnail Slider */
+    .slider-nav-thumbnails {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .slider-nav-thumbnails img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: transform 0.2s ease;
+    }
+
+    .slider-nav-thumbnails img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Zoom Effect */
+    .zoom-container {
+        position: relative;
+    }
+
+    .zoom-preview {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 400px;
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid #ddd;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .zoom-container:hover .zoom-preview {
+        display: block;
+    }
+
+    /* Related Products Section */
+    .related-products {
+        margin-top: 50px;
+    }
+
+    .related-products h3 {
+        margin-bottom: 20px;
+    }
+
+    .related-products .product-card {
+        text-align: center;
+    }
+
+    .related-products .product-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .related-products .product-card .product-name {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .related-products .product-card .product-price {
+        color: #007bff;
+        font-size: 16px;
+    }
+
+    /* Product Price Styling */
+.product-price-cover {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-size: 1.25rem; /* Size for sale price */
+    font-weight: bold;
+    color: #2d2d2d;
+}
+
+.text-brand {
+    color: #e74c3c; /* Sale price color (red) */
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #7f8c8d; /* Gray color for old price */
+    font-size: 1.1rem;
+}
+
+.save-price {
+    font-size: 1rem;
+    color: #27ae60; /* Green color for discount */
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.font-md {
+    font-size: 1.2rem;
+}
+
+.ml-2 {
+    margin-left: 10px;
+}
+
+.primary-color {
+    color: #2d2d2d;
+}
+
+/* Additional styling for the "No Offers" text */
+.save-price.no-offer {
+    color: #95a5a6; /* Gray color for "No Offers" */
+}
+
+/* Mobile and Small Screen Adjustments */
+@media (max-width: 768px) {
+    .product-price-cover {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+    }
+
+    .save-price {
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+}
+
+
+
+/* Container styles */
+.detail-qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 120px;
+    height: 40px;
+    background-color: #f9f9f9;
+}
+
+/* Link styles */
+.detail-qty a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    text-decoration: none;
+    color: #333;
+    background-color: #eaeaea;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for links */
+.detail-qty a:hover {
+    background-color: #dcdcdc;
+}
+
+/* Quantity value styles */
+.qty-val {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Specific icon styles */
+.fi-rs-angle-small-down::before {
+    content: "-";
+    font-size: 20px;
+    color: #333;
+}
+
+.fi-rs-angle-small-up::before {
+    content: "+";
+    font-size: 20px;
+    color: #333;
+}
+
+
+
+
+.product-extra-link2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button.button-add-to-cart {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button.button-add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.action-btn:hover {
+    background-color: #eaeaea;
+    color: #007bff;
+}
+
+
+.product-meta {
+    font-size: 12px;
+    color: grey;
+    margin-top: 20px;
+    line-height: 1.4;
+}
+
+.product-meta li {
+    margin-bottom: 3px;
+}
+
+
+
+
+
+
+
+.product-reviews-section {
+    background-color: #f9f9f9;
+    padding: 40px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.reviews-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-date {
+    font-style: italic;
+}
+
+.review-text {
+    font-size: 1rem;
+    color: #444;
+    margin: 10px 0;
+}
+
+.review-rating {
+    font-size: 1.2rem;
+    color: #ff9800;
+}
+
+.review-rating::before {
+    content: '★★★★★';
+    letter-spacing: 2px;
+}
+
+.review-rating span {
+    display: inline-block;
+    width: 120px;
+    height: 24px;
+    background: linear-gradient(to right, #ff9800 0%, #ff9800 60%, #ddd 60%, #ddd 100%);
+}
+
+
+
+
+
+
+</style>
+
+<main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" rel="nofollow">Home</a> &nbsp;&nbsp; Books &nbsp;&nbsp; product detail page
+            </div>
+        </div>
+    </div>
+
+    <section class="mt-50 mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="product-detail accordion-detail">
+                        <div class="row mb-50">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <!-- Product Slider -->
+                                <div class="detail-gallery zoom-container">
+                                    <div class="product-image-slider">
+                                        <img src="/uploads/re-image/<%=product.productImage[0]%>" class="border-radius-10 main-image">
+                                    </div>
+                                    <div class="zoom-preview"></div>
+                                </div>
+                                <!-- Thumbnail Navigation -->
+                                <div class="slider-nav-thumbnails">
+                                    <% for (let i = 0; i < product.productImage.length; i++) { %>
+                                        <img src="/uploads/re-image/<%= product.productImage[i] %>" alt="Thumbnail" class="thumbnail-image" onclick="changeImage('/uploads/re-image/<%= product.productImage[i] %>')">
+                                    <% } %>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="detail-info">
+                                    <h2 class="title-detail"><%= product.productName %></h2>
+                                    <div class="product-detail-rating">
+                                        
+                                    </div>
+
+                                    <div class="clearfix product-price-cover mb-3">
+                                        <div class="product-price primary-color float-left">
+                                            <ins><span class="text-brand">$<%= product.salePrice %></span></ins>
+                                            <ins><span class="old-price font-md ml-2">$<%= product.regularPrice %></span></ins>
+                                            <span class="save-price font-md color3 ml-2">
+                                                <% if (!totalOffer) { %>
+                                                    No Offers
+                                                <% } else { %>
+                                                    <%= totalOffer %> % Offer
+                                                <% } %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="short-desc mb-3">
+                                        <p><%= product.description %></p>
+                                    </div>
+
+
+                                   
+                                            
+                                            <p>Availability:<span class="in-stock text-success ml-5"><%=quantity%> Items in Stock</span></p>
+
+
+                                    
+
+                                
+
+
+                                    <div class="detail-extralink">
+                                        <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down" onclick=""><i class="fi-rs-angle-small-down"></i></a>
+                                            <span class="qty-val" id="quantity">1</span>
+                                            <a href="#" class="qty-up" onclick=""><i class="fi-rs-angle-small-up"></i></a>
+                                        </div>
+                                        <div class="product-extra-link2">
+                                            <button type="submit" class="button button-add-to-cart" onclick="" href="/cart">Add to cart</button>
+                                                
+                                        </div>
+
+                                        <div class="product_sort_info font-xs mb-3">
+                                            <ul>
+                                                
+                                                <li><i class="fi-rs-refresh mr-1"></i>30 Day Return Policy</li>
+                                                <li><i class="fi-rs-credit-card mr-1"></i>Cash on Delivery Available</li>
+                                            </ul>
+                                        </div>
+                                        
+
+
+                                         <!-- Product Highlights -->
+<div class="product-highlights mb-4">
+    <h4>Product Highlights</h4>
+    <ul>
+        <li><strong>Author:</strong> J.K. Rowling</li>
+        <li><strong>Genre:</strong> Fantasy</li>
+        <li><strong>Language:</strong> English</li>
+        <li><strong>Publication Year:</strong> 1997</li>
+        <li><strong>Pages:</strong> 309 pages</li>
+        <li><strong>ISBN:</strong> 978-0747532699</li>
+        
+    </ul>
+</div>
+
+                                        
+                                        
+                                            
+                                            
+                                          
+
+                                            
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+              <!-- Updated HTML for Customer Reviews -->
+<section class="product-reviews-section">
+    <div class="row">
+    <div class="container">
+        <h3 class="reviews-title">Customer Reviews</h3>
+        <div class="reviews-container">
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">John Doe</span>
+                    <span class="review-date">March 15, 2024</span>
+                </div>
+                <p class="review-text">This book was a fantastic read! Highly recommended for mystery lovers.</p>
+                <div class="review-rating">★★★★★</div>
+            </div>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">Jane Smith</span>
+                    <span class="review-date">March 10, 2024</span>
+                </div>
+                <p class="review-text">A well-written book with engaging characters. Enjoyed every page!</p>
+                <div class="review-rating">★★★★☆</div>
+            </div>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">Michael Brown</span>
+                    <span class="review-date">March 8, 2024</span>
+                </div>
+                <p class="review-text">The plot twist at the end was incredible. I couldn’t put it down.</p>
+                <div class="review-rating">★★★★★</div>
+            </div>
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">Emily White</span>
+                    <span class="review-date">March 5, 2024</span>
+                </div>
+                <p class="review-text">Good story but a bit slow in the middle chapters. Still worth reading.</p>
+                <div class="review-rating">★★★☆☆</div>
+                </div>
+                <div class="review-item">
+                <div class="review-header">
+                    <span class="review-author">Chris Green</span>
+                    <span class="review-date">March 1, 2024</span>
+                </div>
+                <p class="review-text">An absolute masterpiece. This book will stay with me for a long time.</p>
+                <div class="review-rating">★★★★★</div>
+            </div>
+        </div>
+    </div>    </div>
+            
+</section>
+
+
+            <!-- Related Products Section -->
+            <div class="related-products">
+                <h3>Related Products</h3>
+                <div class="row">
+                    <!-- Product 1 -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <img src="uploads/re-image/<%=product.productImage[2]%>" alt="Related Product 1">
+                            <p class="product-name">The Great Gatsby</p>
+                            <p class="product-price">$<%=product.salePrice%></p>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <img src="uploads/re-image/<%=product.productImage[1]%>" alt="Related Product 2">
+                            <p class="product-name">The Great Gatsby</p>
+                            <p class="product-price">$<%=product.salePrice%></p>
+                        </div>
+                    </div>
+                     <!-- Product 3 -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <img src="uploads/re-image/<%=product.productImage[0]%>" alt="Related Product 3">
+                            <p class="product-name">The eyes</p>
+                            <p class="product-price">$<%=product.salePrice%></p>
+                        </div>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <img src="uploads/re-image/<%=product.productImage[3]%>" alt="Related Product 4">
+                            <p class="product-name">Dreams</p>
+                            <p class="product-price">$<%=product.salePrice%></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Popper.js & Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    let currentZoomImage = "";
+
+    // Function to handle main image changes with thumbnails
+    function changeImage(imageUrl) {
+        $('.main-image').attr('src', imageUrl);
+        $('.zoom-preview').css("background-image", `url(${imageUrl})`);
+    }
+
+    // Initialize zoom preview on mouse movement over the main image
+    $('.zoom-container').on('mousemove', function(e) {
+        const offset = $(this).offset();
+        const relX = e.pageX - offset.left;
+        const relY = e.pageY - offset.top;
+
+        $('.zoom-preview')
+            .css({
+                left: `${relX}px`,
+                top: `${relY}px`,
+                backgroundPosition: `-${relX}px -${relY}px`
+            });
+    });
+
+    $('.zoom-container').on('mouseleave', function() {
+        $('.zoom-preview').css({ display: 'none' });
+    });
+</script>
+
+<%- include("../../views/partials/user/footer") %>
+
+

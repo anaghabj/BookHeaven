@@ -1,0 +1,195 @@
+<%-include("../../views/partials/user/header")%>
+<style>
+
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.4rem;
+  color: #555;
+}
+
+/* Product Section Styling */
+.product.spad {
+  padding: 30px 0;
+}
+
+.product__filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Individual Product Card */
+.product-cart-wrap {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  background: #fff;
+}
+
+.product-cart-wrap:hover {
+  transform: translateY(-5px);
+}
+
+/* Product Image */
+.product-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-img-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Product Action Buttons (Wishlist, Cart) */
+.product-action-1 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+  background: #ff4757;
+  color: #fff;
+}
+
+/* Product Info */
+.product-content-wrap {
+  padding: 15px;
+  text-align: center;
+}
+
+.product-content-wrap h6 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.product-content-wrap h5 {
+  color: #007bff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.product-content-wrap a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.product-content-wrap a:hover {
+  background: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .col-lg-3 {
+    flex: 0 0 23%;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-md-4 {
+    flex: 0 0 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-sm-6 {
+    flex: 0 0 100%;
+  }
+}
+
+/* Footer Section */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  background: #fff;
+  color: #fff;
+  font-size: 0.9rem;
+  border-top: 1px solid #fff;
+}
+
+</style>
+
+<section class="product spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="filter__controls">
+            <!-- <li data-filter=".new-arrivals">Featured</li> -->
+            <h2 class="section-title">All Books</h2>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="row product__filter">
+        <% for (let i = 0; i < products.length; i++) { %>
+          <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+            <div class="product-cart-wrap mb-30">
+              <div class="product-img-action-wrap">
+                <div class="product-img product-img-zoom">
+                  <a href="/productDetails?id=<%= products[i]._id %>">
+                    <img class="default-img" src="/uploads/re-image/<%= products[i].productImage[0] %>"
+                      alt="<%= products[i].productName %>">
+                  </a>
+                </div>
+                <div class="product-action-1">
+                  <a aria-label="Add to wishlist" class="action-btn hover-up" href="/addtoWishlist?id=<%= products[i]._id %>">
+                    <i class="fas fa-heart"></i>
+                  </a>
+                </div>
+              </div>
+  
+              <div class="product-content-wrap">
+                <h6><%= products[i].productName %></h6>
+                <h5>$<%= products[i].salePrice %></h5>
+                <a href="/addToCart?id=<%= products[i]._id %>">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <%-include("../../views/partials/user/footer")%>

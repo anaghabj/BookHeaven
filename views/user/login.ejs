@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Page</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+        font-family: "Nunito Sans", sans-serif;
+      }
+      .login-section {
+        max-width: 400px;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background: #fff;
+        padding: 20px;
+      }
+      .form-control:focus {
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+      .social-btns {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+      }
+      .social-btns .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sign-up-link {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .sign-up-link:hover {
+        text-decoration: underline;
+      }
+
+      .forgot-password-link{
+        font-size: 0.875rem;
+        color: #007bff;
+        text-decoration: none;
+
+
+      }
+
+      .forgot-password-link:hover{
+        color:#007bff;
+        text-decoration: underline;
+      }
+
+
+
+
+
+
+      
+
+    </style>
+  </head>
+  <body>
+    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+      <div class="login-section">
+        <h3 class="text-center mb-4">Log In</h3>
+        <form id="loginform" method="post" action="/login">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="Enter email"
+            />
+            <div id="error1" class="text-danger small mt-1"></div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
+            <div id="error2" class="text-danger small mt-1"></div>
+          </div>
+          <div class="form-group d-flex justify-content-end">
+            <a href="/forgot-password" class="forgot-password-link ms-auto">Forgot Password</a>
+          </div>
+          <% if (locals.message && message.length > 0) { %>
+          <div class="alert alert-danger text-center">
+            <%= message %>
+          </div>
+          <% } %>
+          <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
+        </form>
+        <div class="text-center">
+          <p class="d-inline">or log in with</p>
+          <div class="social-btns d-inline">
+            <a href="/auth/google" class="btn btn-outline-danger">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a href="/signup" class="sign-up-link">Not registered? Sign up</a>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const emailid = document.getElementById("email");
+      const passid = document.getElementById("password");
+      const error1 = document.getElementById("error1");
+      const error2 = document.getElementById("error2");
+      const loginform = document.getElementById("loginform");
+
+      function emailValidateChecking(e) {
+        const emailval = emailid.value;
+        const emailpattern =
+          /^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,4})$/;
+
+        if (!emailpattern.test(emailval)) {
+          error1.innerHTML = "Invalid Format";
+        } else {
+          error1.innerHTML = "";
+        }
+      }
+
+      function passValidateChecking(e) {
+        const passval = passid.value;
+        if (passval.length < 8) {
+          error2.innerHTML = "Should contain at least 8 characters";
+        } else {
+          error2.innerHTML = "";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        loginform.addEventListener("submit", function (e) {
+          emailValidateChecking();
+          passValidateChecking();
+          if (error1.innerHTML || error2.innerHTML) {
+            e.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

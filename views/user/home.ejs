@@ -1,6 +1,409 @@
-<%-include("../../views/partials/user/header")%>
 
-	</div><!--header-wrap-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>BookHeaven</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+		.dropdown{
+			position:relative;
+			display:inline-block;
+		}
+
+		.dropdown-content{
+			display: none;
+			position: absolute;
+			background-color: aliceblue;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px  rgba(0, 0, 0, 0.2);
+			z-index: 1000;
+			right: 0;
+
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			width: 100;
+
+		}
+		.dropdown-content a:hover{
+			background-color:white;
+		}
+
+		.dropdown:hover .dropdown-content{
+			position: relative;
+			z-index: 500;
+			display: block;
+
+		}
+
+.header{
+	position:relative;
+	z-index: 500;
+}
+
+	</style>
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-youtube-play"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-behance-square"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							
+                              <!-- <%if(locals.user){%>
+								<div class="dropdown">
+									<a href="#" class="sign-up-link" ><%=locals.user.name%></a>
+									<div class="dropdown-content">
+										<a href="/userProfile">Profile</a>
+										<a href="/logout">logout</a>
+									</div>
+								</div>
+								<%}else{%>
+							<a href="/signup" class="user-account for-buy"><i
+									class="sign-up-link"></i><span>Sign Up</span></a>
+							<a href="/login" class="sign-in-link"><i class="sign-in-link"></i><span>Log in</span></a>
+							<%}%> -->
+
+							<% if (locals.user) { %>
+								<div class="dropdown">
+									<a href="#" class="sign-up-link"><%= locals.user.name %></a>
+									<div class="dropdown-content">
+										<a href="/userProfile">Profile</a>
+										<a href="/logout">Logout</a>
+									</div>
+								</div>
+							<% } else { %>
+								<a href="/signup" class="user-account for-buy"><span>Sign Up</span></a>
+								<a href="/login" class="sign-in-link"><span>Log in</span></a>
+							<% } %>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><h1>BookHeaven</h1></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item active"><a href="#home">Home</a></li>
+									<li class="menu-item has-sub">
+										<a href="#pages" class="nav-link">Pages</a>
+
+										<ul>
+											<li class="active"><a href="index.html">Home</a></li>
+											<li><a href="/product-list">All Books</a></li>
+											
+											<li><a href="index.html">Blog</a></li>
+											<li><a href="index.html">About</a></li>
+											<li><a href="index.html">Contact</a></li>
+											
+										</ul>
+
+									</li>
+									<li class="menu-item"><a href="#featured-books" class="nav-link">Featured</a></li>
+									<li class="menu-item"><a href="#popular-books" class="nav-link">latest Books</a></li>
+									<li class="menu-item"><a href="#special-offer" class="nav-link">Offer</a></li>
+									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>
+									
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+   .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      text-align: center;
+  }
+
+
+  .btn:hover {
+      background-color: #ff4c4c;
+      transform: translateY(-2px);
+  }
+
+
+  .btn:active {
+      transform: translateY(1px);
+  }
+  .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 50%;
+      color: #ff6b6b;
+      font-size: 18px;
+      z-index: 10;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  }
+
+
+  .wishlist-btn:hover {
+      background-color: rgba(255, 255, 255, 1);
+      color: #ff4c4c;
+      transform: translateY(-2px);
+  }
+
+
+  .wishlist-btn:active {
+      transform: translateY(1px);
+  }
+
+
+  .product-img-action-wrap {
+      position: relative;
+  }
+
+
+  .product-img {
+      position: relative;
+      display: block;
+      overflow: hidden;
+  }
+
+
+  .product-cart-wrap {
+      border: 1px solid #eee;
+      padding: 20px;
+      margin-bottom: 30px;
+  }
+
+
+  .product-content-wrap h6 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 5px;
+  }
+
+
+  .product-content-wrap h5 {
+      font-size: 16px;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+  }
+
+
+  .product-content-wrap a {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #ff6b6b;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+      border-radius: 4px;
+      text-decoration: none;
+  }
+
+
+  .product-content-wrap a:hover {
+      background-color: #ff4c4c;
+  }
+
+  </style> 
+
+
+
+
+  <style>
+  .filter__controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .filter__controls li {
+    list-style: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #ff6b6b;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+  }
+
+  .filter__controls li:hover {
+    background-color: #ff4c4c;
+  }
+
+  .product__filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .product-cart-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .product-cart-wrap:hover {
+    transform: scale(1.05);
+  }
+
+  .product-img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .product-action-1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    padding: 8px;
+    color: #ff6b6b;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .product-action-1:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color: #ff4c4c;
+  }
+
+  .product-content-wrap {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .product-content-wrap h6 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .product-content-wrap h5 {
+    font-size: 18px;
+    color: #ff6b6b;
+    margin-bottom: 12px;
+  }
+
+  .product-content-wrap a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+
+  .product-content-wrap a:hover {
+    background-color: #ff4c4c;
+  }
+</style>
+
+
+
 
 	<section id="billboard">
 
@@ -16,13 +419,8 @@
 						<div class="slider-item">
 							<div class="banner-content">
 								<h2 class="banner-title">Life of the Wild</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-									ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
-									urna, a eu.</p>
-								<div class="btn-wrap">
-									<a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i
-											class="icon icon-ns-arrow-right"></i></a>
-								</div>
+								<p>Life of the Wild" is a beautifully illustrated picture book that takes readers on an adventure through the wonders of the animal kingdom. With vibrant imagery and captivating stories, it showcases the natural beauty and behaviors of wildlife. A perfect read for nature enthusiasts of all ages.</p>
+								
 							</div><!--banner-content-->
 							<img src="images/main-banner1.jpg" alt="banner" class="banner-image">
 						</div><!--slider-item-->
@@ -34,7 +432,7 @@
 									ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
 									urna, a eu.</p>
 								<div class="btn-wrap">
-									<a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i
+									<a href="#" class="btn btn-outline-accent btn-accent-arrow"><i
 											class="icon icon-ns-arrow-right"></i></a>
 								</div>
 							</div><!--banner-content-->
@@ -53,118 +451,53 @@
 
 	</section>
 
-	<section id="client-holder" data-aos="fade-up">
+	
+
+
+
+
+	  <section class="product spad">
 		<div class="container">
-			<div class="row">
-				<div class="inner-content">
-					<div class="logo-wrap">
-						<div class="grid">
-							<a href="#"><img src="images/client-image1.png" alt="client"></a>
-							<a href="#"><img src="images/client-image2.png" alt="client"></a>
-							<a href="#"><img src="images/client-image3.png" alt="client"></a>
-							<a href="#"><img src="images/client-image4.png" alt="client"></a>
-							<a href="#"><img src="images/client-image5.png" alt="client"></a>
-						</div>
-					</div><!--image-holder-->
-				</div>
+		  <div class="row">
+			<div class="col-lg-12">
+			  <ul class="filter__controls">
+				<!-- <li data-filter=".new-arrivals">Featured</li> -->
+				<h2 class="section-title">Featured Books</h2>
+			  </ul>
 			</div>
-		</div>
-	</section>
-
-	<section id="featured-books" class="py-5 my-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-
-					<div class="section-header align-center">
-						<div class="title">
-							<span>Some quality items</span>
-						</div>
-						<h2 class="section-title">Featured Books</h2>
+		  </div>
+	  
+		  <div class="row product__filter">
+			<% for (let i = 0; i < products.length; i++) { %>
+			  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+				<div class="product-cart-wrap mb-30">
+				  <div class="product-img-action-wrap">
+					<div class="product-img product-img-zoom">
+					  <a href="/productDetails?id=<%= products[i]._id %>">
+						<img class="default-img" src="/uploads/re-image/<%= products[i].productImage[0] %>"
+						  alt="<%= products[i].productName %>">
+					  </a>
 					</div>
-
-					<div class="product-list" data-aos="fade-up">
-						<div class="row">
-
-							<div class="col-md-3">
-								<div class="product-item">
-									<figure class="product-style">
-										<img src="images/product-item1.jpg" alt="Books" class="product-item">
-										<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-											Cart</button>
-									</figure>
-									<figcaption>
-										<h3>Simple way of piece life</h3>
-										<span>Armor Ramsey</span>
-										<div class="item-price">$ 40.00</div>
-									</figcaption>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="product-item">
-									<figure class="product-style">
-										<img src="images/product-item2.jpg" alt="Books" class="product-item">
-										<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-											Cart</button>
-									</figure>
-									<figcaption>
-										<h3>Great travel at desert</h3>
-										<span>Sanchit Howdy</span>
-										<div class="item-price">$ 38.00</div>
-									</figcaption>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="product-item">
-									<figure class="product-style">
-										<img src="images/product-item3.jpg" alt="Books" class="product-item">
-										<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-											Cart</button>
-									</figure>
-									<figcaption>
-										<h3>The lady beauty Scarlett</h3>
-										<span>Arthur Doyle</span>
-										<div class="item-price">$ 45.00</div>
-									</figcaption>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="product-item">
-									<figure class="product-style">
-										<img src="images/product-item4.jpg" alt="Books" class="product-item">
-										<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-											Cart</button>
-									</figure>
-									<figcaption>
-										<h3>Once upon a time</h3>
-										<span>Klien Marry</span>
-										<div class="item-price">$ 35.00</div>
-									</figcaption>
-								</div>
-							</div>
-
-						</div><!--ft-books-slider-->
-					</div><!--grid-->
-
-
-				</div><!--inner-content-->
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-
-					<div class="btn-wrap align-right">
-						<a href="#" class="btn-accent-arrow">View all products <i
-								class="icon icon-ns-arrow-right"></i></a>
+					<div class="product-action-1">
+					  <a aria-label="Add to wishlist" class="action-btn hover-up" href="/addtoWishlist?id=<%= products[i]._id %>">
+						<i class="fas fa-heart"></i>
+					  </a>
 					</div>
-
+				  </div>
+	  
+				  <div class="product-content-wrap">
+					<h6><%= products[i].productName %></h6>
+					<h5>$<%= products[i].salePrice %></h5>
+					<a href="/addToCart?id=<%= products[i]._id %>">Add to Cart</a>
+				  </div>
 				</div>
-			</div>
+			  </div>
+			<% } %>
+		  </div>
 		</div>
-	</section>
+	  </section>
+
+	  
 
 	<section id="best-selling" class="leaf-pattern-overlay">
 		<div class="corner-pattern-overlay"></div>
@@ -733,43 +1066,6 @@
 		</div>
 	</section>
 
-	<section id="subscribe">
-		<div class="container">
-			<div class="row justify-content-center">
-
-				<div class="col-md-8">
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<div class="title-element">
-								<h2 class="section-title divider">Subscribe to our newsletter</h2>
-							</div>
-
-						</div>
-						<div class="col-md-6">
-
-							<div class="subscribe-content" data-aos="fade-up">
-								<p>Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit
-									adipiscing enim pharetra hac.</p>
-								<form id="form">
-									<input type="text" name="email" placeholder="Enter your email addresss here">
-									<button class="btn-subscribe">
-										<span>send</span>
-										<i class="icon icon-send"></i>
-									</button>
-								</form>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
 	<section id="latest-blog" class="py-5 my-5">
 		<div class="container">
 			<div class="row">
@@ -901,36 +1197,6 @@
 		</div>
 	</section>
 
-	<section id="download-app" class="leaf-pattern-overlay">
-		<div class="corner-pattern-overlay"></div>
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<div class="row">
-
-						<div class="col-md-5">
-							<figure>
-								<img src="images/device.png" alt="phone" class="single-image">
-							</figure>
-						</div>
-
-						<div class="col-md-7">
-							<div class="app-info">
-								<h2 class="section-title divider">Download our app now !</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus
-									liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna.
-									Adipiscing fames semper erat ac in suspendisse iaculis.</p>
-								<div class="google-app">
-									<img src="images/google-play.jpg" alt="google play">
-									<img src="images/app-store.jpg" alt="app store">
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 
 	<%-include("../../views/partials/user/footer")%>
