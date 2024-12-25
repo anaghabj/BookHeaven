@@ -1,4 +1,5 @@
 <%- include("../../views/partials/user/header") %>
+
 <style>
  .card-green {
    background-color: #ADD8E6;
@@ -125,14 +126,20 @@
 .breadcrumb a:hover::after {
  transform: scaleX(1);
 }
-</style>
+</style> 
+
+
+
+
+
+
 
 
 <main class="main">
  <div class="page-header breadcrumb-wrap mb-3">
    <div class="container">
      <div class="breadcrumb">
-       <a href="#" rel="nofollow">Home</a>
+       <a href="/" rel="nofollow">Home</a>
        <span></span> Profile <span></span> Account
      </div>
    </div>
@@ -214,43 +221,38 @@
                  aria-labelledby="address-tab"
                >
                  <div class="row">
-                
-                   <div class="col-lg-6">
-                     <div class="card mb-3 mb-lg-0">
-                       <div class="card-header">
-                         <h5 class="mb-0"></h5>
-                       </div>
-
-
-                       <div class="card-body">
-                         <address>
-                        
-                        
-                         </address>
-                         <p></p>
-                      
-                         <div class="d-flex justify-content-between">
-                           <a href="#" class="btn-small">Edit</a>
-                           <a href="#" class="btn-small" onclick="">Delete</a>
-                         </div>
-                        
-                       </div>
-                     </div>
-                   </div>
-                
-                   <div class="col-lg-6">
-                     <div class="card mb-3 mb-lg-0">
-                       <div class="card-header">
-                         <h5 class="mb-0"></h5>
-                       </div>
-                       <div class="card-body">
-                         <address>No address</address>
-                       </div>
-                     </div>
-                   </div>
+                  <% if (userAddress) { %>
+                    <% userAddress.address.forEach((address) => { %>
+                        <div class="col-lg-6">
+                            <div class="card mb-3 mb-lg-0">
+                                <div class="card-header">
+                                    <h5 class="mb-0"><%= address.addressType %></h5>
+                                </div>
+                                <div class="card-body">
+                                    <address>
+                                        <%= address.name %><br>
+                                        <%= address.city %><br>
+                                        <%= address.landMark %><br>
+                                        <%= address.state %>
+                                    </address>
+                                    <p><%= address.pincode %></p>
+                                    <p><%= address.phone %></p>
+                                    <p><%= address.altPhone %></p>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="/editAddress?id=<%=address._id%>" class="btn-small">Edit</a>
+                                        <a href="/deleteAddress?id=<%=address._id%>" class="btn-small" onclick="">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                 <% } else { %>
+                    <p>No address available</p>
+                 <% } %>
+                 
               
                    <div>
-                     <a href="#">
+                     <a href="/addAddress">
                        <button class="btn btn-primary w-70">
                          Add address
                        </button>

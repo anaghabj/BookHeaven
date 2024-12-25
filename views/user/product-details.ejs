@@ -30,6 +30,7 @@
         max-width: 100%;
         height: auto;
         border-radius: 10px;
+       
     }
 
     /* Slider Section */
@@ -379,18 +380,251 @@
 
 
 
+.breadcrumb {
+  list-style: none;
+  padding: 10;
+  margin: 0;
+  display: flex;
+}
+
+.breadcrumb-item {
+  margin-right: 8px;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+
+
+/* Container for product highlights */
+.product-highlights {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Adjust max width as needed */
+    margin: 0 auto;
+}
+
+/* Title styling */
+.product-highlights h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* List styling */
+.product-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List items */
+.product-highlights li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Strong labels styling */
+.product-highlights li strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Optional: Add some space between the list and content */
+.product-highlights li:last-child {
+    margin-bottom: 0;
+}
+
+/* Add hover effect on list items for better interactivity */
+.product-highlights li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+
+
+
+
+/* Main container for the gallery */
+.zoom-container {
+    position: relative;
+    width: 80%;
+    max-width: 500px;  /* Adjust as necessary */
+    margin: 0 auto;
+    
+}
+
+/* Styling for the main image */
+.product-image-slider {
+    position: relative;
+    overflow: hidden;  /* Prevents zoom effect from spilling out of the image */
+}
+
+/* Image styling with a smooth transition for zoom */
+.product-image-slider img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth zoom transition */
+    border-radius: 10px;
+}
+
+/* Zoom effect, achieved by scaling the image on hover */
+.product-image-slider img:hover {
+    transform: scale(1.2); /* Zoom effect inside the image */
+    cursor: zoom-in;
+}
+
+
+
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+/* Detail Info Section */
+
+
+/* Title Styling */
+.title-detail {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Product Rating */
+.product-detail-rating {
+    margin-bottom: 15px;
+}
+
+/* Price Styling */
+.product-price {
+    font-size: 22px;
+    color: #ff5722;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 8px;
+}
+
+.save-price {
+    font-size: 14px;
+    color: #4caf50;
+}
+
+/* Short Description */
+.short-desc p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Availability */
+.in-stock {
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Quantity Selector */
+.detail-qty {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.detail-qty a {
+    display: inline-block;
+    background: #f1f1f1;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    color: #333;
+    cursor: pointer;
+}
+
+.qty-val {
+    padding: 5px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* Add to Cart Button */
+.button-add-to-cart {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button-add-to-cart:hover {
+    background: #0056b3;
+}
+
+/* Product Info List */
+.product_sort_info ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.product_sort_info ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.product_sort_info ul li i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+
+
+
+
+
+
+
 
 
 </style>
 
-<main class="main">
-    <div class="page-header breadcrumb-wrap">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="/" rel="nofollow">Home</a> &nbsp;&nbsp; Books &nbsp;&nbsp; product detail page
+
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" rel="nofollow">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/product-list">All Books</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Book Detail Page</li>
+                    </ol>
+                </nav>
             </div>
-        </div>
-    </div>
+        </div> 
+    </main>
+    
 
     <section class="mt-50 mb-50">
         <div class="container">
@@ -424,7 +658,7 @@
                                     <div class="clearfix product-price-cover mb-3">
                                         <div class="product-price primary-color float-left">
                                             <ins><span class="text-brand">$<%= product.salePrice %></span></ins>
-                                            <ins><span class="old-price font-md ml-2">$<%= product.regularPrice %></span></ins>
+                                            <ins><span class="old-price font-md ml-2">$<%= product.regularPrice %></span></ins><br>
                                             <span class="save-price font-md color3 ml-2">
                                                 <% if (!totalOffer) { %>
                                                     No Offers
@@ -456,7 +690,8 @@
                                             <a href="#" class="qty-up" onclick=""><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart" onclick="" href="/cart">Add to cart</button>
+                                            <button type="button" class="button button-add-to-cart" onclick="addToCart('<%= product._id %>')">Add to cart</button>
+
                                                 
                                         </div>
 
@@ -467,30 +702,7 @@
                                                 <li><i class="fi-rs-credit-card mr-1"></i>Cash on Delivery Available</li>
                                             </ul>
                                         </div>
-                                        
-
-
-                                         <!-- Product Highlights -->
-<div class="product-highlights mb-4">
-    <h4>Product Highlights</h4>
-    <ul>
-        <li><strong>Author:</strong> J.K. Rowling</li>
-        <li><strong>Genre:</strong> Fantasy</li>
-        <li><strong>Language:</strong> English</li>
-        <li><strong>Publication Year:</strong> 1997</li>
-        <li><strong>Pages:</strong> 309 pages</li>
-        <li><strong>ISBN:</strong> 978-0747532699</li>
-        
-    </ul>
-</div>
-
-                                        
-                                        
-                                            
-                                            
-                                          
-
-                                            
+                                                  
                                         
                                     </div>
                                 </div>
@@ -499,6 +711,24 @@
                     </div>
                 </div>
             </div>
+            <br>
+
+
+
+
+            <div class="product-highlights mb-4">
+                <h4>Book Highlights</h4>
+                <ul>
+                    
+                    <li><strong>Language:</strong> English</li>
+                    <li><strong>Publication Year:</strong> 1997</li>
+                    <li><strong>Pages:</strong> 309 pages</li>
+                    <li><strong>Publisher:</strong> Bloomsbury Publishing</li>
+                    <li><strong>ISBN:</strong> 978-0747532699</li>
+                    
+                </ul>
+            </div>
+            
 
 
               <!-- Updated HTML for Customer Reviews -->
@@ -627,7 +857,89 @@
     $('.zoom-container').on('mouseleave', function() {
         $('.zoom-preview').css({ display: 'none' });
     });
+
+
+
+
+
+
+    const mainImage = document.querySelector('.product-image-slider img');
+
+mainImage.addEventListener('mousemove', function (e) {
+    const { left, top, width, height } = mainImage.getBoundingClientRect();
+    const mouseX = e.clientX - left;
+    const mouseY = e.clientY - top;
+
+    // Calculate the zoom percentage based on mouse position
+    const zoomX = (mouseX / width) * 100;
+    const zoomY = (mouseY / height) * 100;
+
+    // Apply the zoom effect by adjusting the transform origin
+    mainImage.style.transformOrigin = `${zoomX}% ${zoomY}%`;
+    mainImage.style.transform = 'scale(1.2)';
+});
+
+mainImage.addEventListener('mouseleave', function () {
+    mainImage.style.transform = 'scale(1)';
+});
+
+
+
+
+
+function addToCart(productId) {
+  $.ajax({
+    url: "/addToCart",
+    method: "POST",
+    data: { productId: productId },
+    success: (response) => {
+      if (response.status === true) {
+        Swal.fire({
+          title: "Added to Cart",
+          text: "The product has been added to your cart.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          // You can either update the cart count here or redirect to the cart page
+          window.location.href = "/shop";
+        });
+      } else {
+        let message = "Unable to add the product to your cart.";
+        if (response.status === "Out of stock") {
+          message = "The product is out of stock.";
+        } else if (response.status === "Product not found") {
+          message = "Product not found.";
+        }
+        
+        Swal.fire({
+          title: "Error",
+          text: message,
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    },
+    error: (error) => {
+      Swal.fire({
+        title: "Error",
+        text: "There was an error processing your request.",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    },
+  });
+}
+
+
+
+
+
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <%- include("../../views/partials/user/footer") %>
 

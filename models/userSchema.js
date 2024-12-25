@@ -37,10 +37,16 @@ const userSchema = new Schema({
         type:Boolean,
         default:false
     },
-    cart:[{
-        type:Schema.Types.ObjectId,
-        ref:"Cart"
-    }],
+    // cart:[{
+    //     type:Schema.Types.ObjectId,
+    //     ref:"Cart"
+    // }],
+
+    cart: [{
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+        quantity: { type: Number, required: true },
+      }],
+      
     wallet:{
         type:Number,
         default:0
@@ -58,7 +64,7 @@ const userSchema = new Schema({
     }],
     cretedOn:{
         type:Date,
-        defaut:Date.now
+        default:Date.now
     },
     referalCode:{
        type:String,
@@ -78,7 +84,7 @@ const userSchema = new Schema({
         category:{
             
                 type:Schema.Types.ObjectId,
-                ref:"category"
+                ref:"Category"
             },
             searchOn:{
                 type:Date,

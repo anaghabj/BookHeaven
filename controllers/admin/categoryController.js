@@ -2,36 +2,47 @@ const Category = require('../../models/categorySchema');
 
 const Product = require('../../models/productSchema')
 
-const categoryInfo=async(req,res)=>{
+
+
+const categoryInfo = async (req, res) => {
     try {
-
-
-        const search = req.query.search || "";
-      
-        const page = parseInt(req.query.page) || 1;
-        const limit = 3;
-        const skip = (page-1)*limit;
-
-        const categoryData = await Category.find({})
-        .sort({createdAt:-1})
+      // Get the search term and pagination parameters
+      const search = req.query.search || "";
+      const page = parseInt(req.query.page) || 1;
+      const limit = 3;
+      const skip = (page - 1) * limit;
+  
+      // If search term is provided, filter by name, else get all categories
+      const query = search ? { name: { $regex: search, $options: "i" } } : {};
+  
+      // Fetch categories based on search query, pagination, and sorting
+      const categoryData = await Category.find(query)
+        .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
-
-        const totalCategories = await Category.countDocuments();
-        const totalPages = Math.ceil(totalCategories/limit)
-        res.render("category",{
-            cat:categoryData,
-            currentPage:page,
-            totalPages:totalPages,
-            totalCategories:totalCategories
-        })
-        
+  
+      // Count the total number of categories (matching the search or all categories)
+      const totalCategories = await Category.countDocuments({});
+  
+      // Calculate total pages based on total categories (use totalCategories count)
+      const totalPages = Math.ceil(totalCategories / limit);
+  
+      // Render the category page with data
+      res.render("category", {
+        cat: categoryData,
+        currentPage: page,
+        totalPages: totalPages,
+        totalCategories: totalCategories,
+        search: search, // Pass the search term to retain it in the input field
+      });
     } catch (error) {
-        console.error(error)
-        res.redirect('/pageerror')
-        
+      console.error(error);
+      res.redirect('/pageerror'); // Optionally pass error message for debugging
     }
-}
+  };
+  
+  
+
 
 
 

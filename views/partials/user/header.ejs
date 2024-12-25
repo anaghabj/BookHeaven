@@ -90,22 +90,7 @@
 						</div><!--social-links-->
 					</div>
 					<div class="col-md-6">
-						<div class="right-element">
-							
-                              <!-- <%if(locals.user){%>
-								<div class="dropdown">
-									<a href="#" class="sign-up-link" ><%=locals.user.name%></a>
-									<div class="dropdown-content">
-										<a href="/userProfile">Profile</a>
-										<a href="/logout">logout</a>
-									</div>
-								</div>
-								<%}else{%>
-							<a href="/signup" class="user-account for-buy"><i
-									class="sign-up-link"></i><span>Sign Up</span></a>
-							<a href="/login" class="sign-in-link"><i class="sign-in-link"></i><span>Log in</span></a>
-							<%}%> -->
-
+						<div class="right-element d-flex justify-content-end align-items-center">
 							<% if (locals.user) { %>
 								<div class="dropdown">
 									<a href="#" class="sign-up-link"><%= locals.user.name %></a>
@@ -118,18 +103,159 @@
 								<a href="/signup" class="user-account for-buy"><span>Sign Up</span></a>
 								<a href="/login" class="sign-in-link"><span>Log in</span></a>
 							<% } %>
-
-							<div class="action-menu">
-
-								<div class="search-bar">
-									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
-										<i class="icon icon-search"></i>
-									</a>
-									<form role="search" method="get" class="search-box">
-										<input class="search-field text search-input" placeholder="Search"
-											type="search">
-									</form>
+					
+							<!-- Wishlist Icon -->
+							<div class="wishlist-container mx-3">
+								<a href="/wishlist" class="wishlist-link">
+									<span>♡</span>
+								</a>
+							</div>
+					
+							<!-- Cart Icon -->
+							<a href="/cart" class="cart-link mx-3">
+								<div class="cart-icon">
+									<i class="fas fa-shopping-cart"></i>
 								</div>
+							</a>
+					
+							<!-- Search Bar -->
+							<div class="search-bar">
+								<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+									<i class="icon icon-search"></i>
+								</a>
+								<form role="search" method="get" class="search-box">
+									<input class="search-field text search-input" placeholder="Search" type="search">
+								</form>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Add CSS Styles -->
+					<style>
+						.right-element {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+						}
+					
+						.action-menu {
+							display: flex;
+							align-items: center;
+						}
+					
+						.action-items {
+							display: flex;
+							align-items: center;
+							gap: 20px; /* Adjust the spacing between icons */
+						}
+					
+						.user-account, .wishlist-container, .cart-link, .search-bar {
+							display: inline-block;
+						}
+					
+						.user-account-link, .sign-up-link, .sign-in-link {
+							font-size: 16px;
+							color: #333;
+							text-decoration: none;
+						}
+					
+						.wishlist-link span, .cart-icon i {
+							font-size: 24px; /* Adjust icon size */
+							color: #333;
+						}
+					
+						.search-box {
+							display: none;
+							margin-left: 10px;
+						}
+					
+						.search-button {
+							font-size: 24px;
+							color: #333;
+							cursor: pointer;
+						}
+					
+						/* Show search bar on toggle */
+						.search-toggle:focus + .search-box,
+						.search-box:focus-within {
+							display: block;
+						}
+					</style>
+					
+								
+								
+
+
+								 
+								  
+								  <style>
+
+
+
+
+
+
+
+/* Cart Icon Styling */
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.cart-icon .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+									.wishlist-container {
+									  display: flex;
+									  justify-content: center;
+									  align-items: center;
+									  margin: 10px 0;
+									}
+								  
+									.wishlist-link {
+									  text-decoration: none;
+									  font-size: 16px;
+									  font-weight: bold;
+									  color: #000;
+									  display: flex;
+									  align-items: center;
+									  gap: 5px;
+									}
+								  
+									.wishlist-link:hover {
+									  color: #333;
+									}
+								  
+									.wishlist-link span {
+									  font-size: 20px;
+									}
+								  </style>
+								  
+
+
+								<div>
+
+								</div>
+
 							</div>
 
 						</div><!--top-right-->
@@ -162,7 +288,7 @@
 										
 
 									</li>
-									<li class="menu-item"><a href="#featured-books" class="nav-link">SHOP</a></li>
+									<li class="menu-item"><a href="/shop" class="nav-link">SHOP</a></li>
 									<li class="menu-item"><a href="#popular-books" class="nav-link">BLOG</a></li>
 									<li class="menu-item"><a href="#special-offer" class="nav-link">ABOUT</a></li>
 									<li class="menu-item"><a href="#latest-blog" class="nav-link">CONTACT</a></li>
@@ -183,3 +309,7 @@
 				</div>
 			</div>
 		</header>
+		<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  rel="stylesheet"
+/>

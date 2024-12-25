@@ -1,29 +1,88 @@
+
+
+
+
+
+
 <%- include("../../views/partials/user/header") %>
 <section class="content-main mt-80 mb-80">
-   <div class="card mx-auto card-login col-4">
-       <div class="card-body">
-           <h4 class="card-title mb-4">Enter Current Email</h4>
+   <div class="card mx-auto card-login col-4 shadow">
+       <div class="card-body p-4">
+           <h4 class="card-title mb-4 text-center text-primary">Enter Current Email</h4>
            <form method="post" action="/change-email" onsubmit="return validateLoginForm()">
                <div class="mb-3">
                    <input class="form-control" name="email" placeholder="Email" type="text" id="email">
-                   <div class="error-message" id="email-error"></div>
+                   <div class="error-message text-danger mt-1" id="email-error"></div>
                </div>
                <div class="mb-4">
                    <button type="submit" class="btn btn-primary w-100">Verify</button>
                </div>
            </form>
-         
-         
        </div>
    </div>
 </section>
+<style>
+   body {
+       font-family: 'Arial', sans-serif;
+       background-color: #f8f9fa;
+       margin: 0;
+       padding: 0;
+   }
+
+   .content-main {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       min-height: 100vh;
+       background-color: #f0f0f0;
+   }
+
+   .card-login {
+       background-color: #ffffff;
+       border: 1px solid #ddd;
+       border-radius: 8px;
+   }
+
+   .card-title {
+       font-size: 1.5rem;
+       font-weight: bold;
+   }
+
+   .form-control {
+       border: 1px solid #ced4da;
+       border-radius: 5px;
+       padding: 10px;
+       font-size: 1rem;
+   }
+
+   .form-control:focus {
+       border-color: #007bff;
+       box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+   }
+
+   .btn-primary {
+       background-color: #007bff;
+       border-color: #007bff;
+       font-size: 1.2rem;
+       font-weight: bold;
+       transition: background-color 0.3s;
+   }
+
+   .btn-primary:hover {
+       background-color: #0056b3;
+   }
+
+   .error-message {
+       font-size: 0.9rem;
+       color: #dc3545;
+   }
+</style>
 <script>
    function validateLoginForm() {
        const emailInput = document.getElementById('email');
        const emailError = document.getElementById('email-error');
        const emailValue = emailInput.value.trim();
        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
 
        if (emailValue === '') {
            emailError.textContent = 'Please enter your email.';

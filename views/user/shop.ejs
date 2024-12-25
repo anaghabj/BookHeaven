@@ -1,0 +1,418 @@
+<%- include("../../views/partials/user/header") %>
+
+<!-- Add Bootstrap CSS and JS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-ENjdO4Dr2bkBIFxQpeoYz1HiCp6O3EFSqs9UM1N64WnD9Tztc5KfGSTknEdeQ2Kv"
+  crossorigin="anonymous"
+/>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+6s9cUmQl4BHH5vrvUbjtcP0I2U0D"
+  crossorigin="anonymous"
+></script>
+
+<style>
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    overflow: hidden;
+    max-width: 500px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width:500px;
+  }
+
+  .search-button {
+    padding: 8px 15px;
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .wishlist-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(237, 247, 247, 0.8);
+    color: #ff0000;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .add-to-cart-btn {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .filter-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+  }
+
+  .price-button {
+    display: block;
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .price-button:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+
+
+
+  .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Space between buttons */
+  margin-top: 20px; /* Space above the pagination */
+}
+
+.pagination .btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007bff; /* Primary color */
+  text-decoration: none;
+  border: 1px solid #ddd; /* Border for buttons */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination .btn:hover {
+  background-color: #007bff; /* Primary color on hover */
+  color: #fff; /* Text color on hover */
+}
+
+.pagination .btn.active {
+  background-color: #007bff; /* Active page button */
+  color: #fff; /* Text color for active button */
+  pointer-events: none; /* Disable clicks on the active button */
+  border-color: #007bff;
+}
+
+.pagination .btn:disabled {
+  color: #ccc; /* Disabled button color */
+  background-color: #f8f9fa; /* Background for disabled */
+  border-color: #ddd; /* Border for disabled */
+  pointer-events: none; /* Disable pointer events */
+}
+
+
+
+
+
+
+
+  
+
+
+
+  /* Search Input */
+  .search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+  }
+
+  /* Search Button */
+  .search-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+
+  .search-button:focus {
+    outline: none;
+  }
+
+  .search-button:active {
+    background-color: #004085;
+  }
+
+
+
+
+</style>
+
+<div class="main-container">
+  <section class="shop-page container">
+    <div class="shop-topbar d-flex justify-content-between align-items-center mb-3">
+      <div class="search-bar">
+        <form action="/search" method="POST" class="search-form">
+          <input type="text" name="query" placeholder="Search items..." class="search-input" />
+          <button type="submit" class="search-button">Search</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-lg-3">
+        <div class="filter-section mb-4">
+          <div class="filter-title">Categories</div>
+          <ul class="list-group">
+            <%for(let i=0;i<category.length;i++){%>
+            <li class="list-group-item">
+              <a href="/filter?category=<%=category[i]._id%>"><%=category[i].name%></a>
+            </li>
+            <%}%>
+          </ul>
+        </div>
+
+        <div class="price-filter">
+          <div class="filter-title">Filter by Price</div>
+          <div class="price-options">
+            <a href="/filterPrice?gt=0&lt=500" class="price-button">Under ₹500</a>
+            <a href="/filterPrice?gt=500&lt=1000" class="price-button">₹500 - ₹1000</a>
+            <a href="/filterPrice?gt=1000&lt=1500" class="price-button">₹1000- ₹1500</a>
+            <a href="/filterPrice?gt=1500&lt=100000" class="price-button">Above ₹1500</a>
+          </div>
+        </div>
+      </aside>
+
+
+
+   <main class="col-lg-9">
+    <div class="row g-4">
+      <% for (let i = 0; i < products.length; i++) { %>
+        <% if (i > 0 && i % 3 === 0) { %>
+          </div><div class="row g-4">
+        <% } %>
+        <div class="col-md-4">
+          <div class="product-card">
+            <span class="wishlist-btn" onclick="addToWishlist('<%=products[i]._id%>')"> &#10084;</span>
+            <a href="/productDetails?id=<%= products[i]._id %>">
+              <img
+                src="/uploads/re-image/<%= products[i].productImage[0] %>"
+                alt="<%= products[i].productName %>"
+              />
+              <h4><%= products[i].productName %></h4>
+              <p><%= products[i].category.name %></p>
+              <p>
+                Price: <%= products[i].salePrice.toLocaleString('en-IN') %>
+                <span class="text-muted"
+                  ><strike
+                    ><%= products[i].regularPrice.toLocaleString('en-IN') %></strike
+                  ></span
+                >
+              </p>
+            </a> 
+            <button class="add-to-cart-btn" onclick="addToCart('<%= products[i]._id %>')">Add to Cart</button>
+
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </main>
+  
+  
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+          <a class="btn" href="/shop?page=<%= currentPage - 1 %>">Prev</a>
+        <% } %>
+   
+   
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <a class="btn <%= currentPage === i ? 'active' : '' %>" href="/shop?page=<%= i %>"><%= i %></a>
+        <% } %>
+   
+   
+        <% if (currentPage < totalPages) { %>
+          <a class="btn" href="/shop?page=<%= currentPage + 1 %>">Next</a>
+        <% } %>
+      </div>
+   
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+<%- include("../../views/partials/user/footer") %>
+
+
+
+<script>
+    function addToWishlist(productId) {
+        $.ajax({
+            url: "/addToWishlist",
+            method: "POST",
+            data: { productId: productId },
+            success: (response) => {
+                if (response.status) {
+                    Swal.fire({
+                        title: "Added to Wishlist",
+                        text: "The product has been added to your wishlist.",
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Already in Wishlist",
+                        text: "This product is already in your wishlist.",
+                        icon: 'info',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            },
+            error: (error) => {
+                Swal.fire({
+                    title: "Error",
+                    text: "There was an error adding the product to your wishlist.",
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+
+
+
+    function addToCart(productId) {
+  $.ajax({
+    url: "/addToCart",
+    method: "POST",
+    data: { productId: productId },
+    success: (response) => {
+      if (response.status === true) {
+        Swal.fire({
+          title: "Added to Cart",
+          text: "The product has been added to your cart.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          // You can either update the cart count here or redirect to the cart page
+          window.location.href = "/shop";
+        });
+      } else {
+        let message = "Unable to add the product to your cart.";
+        if (response.status === "Out of stock") {
+          message = "The product is out of stock.";
+        } else if (response.status === "Product not found") {
+          message = "Product not found.";
+        }
+        
+        Swal.fire({
+          title: "Error",
+          text: message,
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    },
+    error: (error) => {
+      Swal.fire({
+        title: "Error",
+        text: "There was an error processing your request.",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    },
+  });
+}
+
+
+
+
+
+
+
+</script>
+
+   

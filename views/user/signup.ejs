@@ -2,6 +2,14 @@
 
 
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +24,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-
   <style>
     body {
       display: flex;
@@ -24,23 +31,67 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background-color: #f8f9fa;
+      background: linear-gradient(to right);
+      font-family: 'Nunito Sans', sans-serif;
     }
+
+
+
+  
+
 
     .card {
       width: 100%;
       max-width: 600px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;;
+      margin-bottom: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
 
     .card-body {
-      padding: 2rem;
+      padding: 2.5rem;
     }
 
     .card-title {
       margin-bottom: 1.5rem;
       font-weight: 700;
+      font-size: 2rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #ff7e5f;
+      box-shadow: 0 0 8px rgba(255, 126, 95, 0.8);
+    }
+
+    .btn-primary {
+      background-color: #5fcaff;
+      border-color: #ff7e5f;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #7bccfe;
+      border-color: #feb47b;
     }
 
     .error-message {
@@ -49,38 +100,53 @@
       display: none;
     }
 
-    .social-link {
-      margin-top: 1rem;
-      font-size: 0.9rem;
+    .social-btns a {
+      font-size: 1.5rem;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 50%;
+      background-color: #db4437;
+      color: white;
+      transition: all 0.3s ease;
     }
 
-    .social-link a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .social-link a:hover {
-      text-decoration: underline;
+    .social-btns a:hover {
+      background-color: #c1351d;
+      transform: scale(1.1);
     }
 
     .login-link {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      text-align: center;
       font-size: 0.9rem;
+      color: #333;
     }
 
     .login-link a {
-      color: #007bff;
+      color: #ff7e5f;
       text-decoration: none;
+      font-weight: 600;
     }
 
     .login-link a:hover {
       text-decoration: underline;
     }
 
-    .error-message {
-      color: red;
-      font-size: 0.75rem;
-      display: none;
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -88,9 +154,8 @@
 <body>
   <div class="card">
     <div class="card-body">
-      <h3 class="card-title text-center">Sign Up</h3>
+      <h3 class="card-title">Sign Up</h3>
       <form id="signform" method="post" action="/signup">
-       
         <div class="form-group mb-3">
           <label for="name">Full Name</label>
           <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" />
@@ -115,26 +180,21 @@
           <div id="error4" class="error-message"></div>
         </div>
 
-      
         <div class="form-group mb-4">
           <label for="confirm-password">Confirm Password</label>
           <input type="password" class="form-control" name="cPassword" id="confirm-password" placeholder="Confirm Password" />
           <div id="error5" class="error-message"></div>
         </div>
+
         <% if (locals.message && message.length > 0) { %>
           <div class="alert alert-danger text-center">
             <%= message %>
           </div>
-          <% } %>
+        <% } %>
 
-        
-        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-        
-       
-        <br>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
 
-
-        <div class="text-center">
+        <div class="text-center mt-3">
           <p class="d-inline">or log in with</p>
           <div class="social-btns d-inline">
             <a href="/auth/google" class="btn btn-outline-danger">
@@ -143,8 +203,7 @@
           </div>
         </div>
 
-        
-        <p class="login-link text-center">Already registered? <a href="/login">Login</a></p>
+        <p class="login-link">Already registered? <a href="/login">Login</a></p>
       </form>
     </div>
   </div>

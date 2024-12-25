@@ -24,7 +24,7 @@ const couponSchema = new Schema ({
         required:true
     },
     minimumPrice:{
-        type:NUmber,
+        type:Number,
         required:true
     },
     isList:{
